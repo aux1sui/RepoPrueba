@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
 @NamedQueries( {
 @NamedQuery(name = "Employees.findAll", query = "select o from Employees o") ,
 @NamedQuery(name = "Employees.findBySal", query = "select o from Employees o where o.salary > :p_sal") ,
-@NamedQuery(name = "Employees.findByName", query = "select o from Employees o where o.firstName like :p_name")
+@NamedQuery(name = "Employees.findByLastName", query = "select o from Employees o where o.lastName like :p_lastName")
 }) 
 public class Employees implements Serializable {
     private static final long serialVersionUID = -7478428200938493715L;
