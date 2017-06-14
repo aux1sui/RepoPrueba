@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:table value="#{bindings.employeesFindBySal.collectionModel}" var="row"
+            rows="#{bindings.employeesFindBySal.rangeSize}"
+            emptyText="#{bindings.employeesFindBySal.viewable ? 'No data to display.' : 'Access Denied.'}"
+            rowBandingInterval="0" selectedRowKeys="#{bindings.employeesFindBySal.collectionModel.selectedRow}"
+            selectionListener="#{bindings.employeesFindBySal.collectionModel.makeCurrent}" rowSelection="single"
+            fetchSize="#{bindings.employeesFindBySal.rangeSize}"
+            filterModel="#{bindings.employeesFindBySalQuery.queryDescriptor}" filterVisible="true"
+            queryListener="#{bindings.employeesFindBySalQuery.processQuery}" varStatus="vs" id="t1">
+    <af:column sortProperty="#{bindings.employeesFindBySal.hints.commissionPct.name}" filterable="true" sortable="true"
+               headerText="#{bindings.employeesFindBySal.hints.commissionPct.label}" id="c1">
+      <af:outputText value="#{row.commissionPct}" shortDesc="#{bindings.employeesFindBySal.hints.commissionPct.tooltip}"
+                     id="ot1">
+        <af:convertNumber groupingUsed="false" pattern="#{bindings.employeesFindBySal.hints.commissionPct.format}"/>
+      </af:outputText>
+    </af:column>
+    <af:column sortProperty="#{bindings.employeesFindBySal.hints.email.name}" filterable="true" sortable="true"
+               headerText="#{bindings.employeesFindBySal.hints.email.label}" id="c2">
+      <af:outputText value="#{row.email}" shortDesc="#{bindings.employeesFindBySal.hints.email.tooltip}" id="ot2"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.employeesFindBySal.hints.employeeId.name}" filterable="true" sortable="true"
+               headerText="#{bindings.employeesFindBySal.hints.employeeId.label}" id="c3">
+      <af:outputText value="#{row.employeeId}" shortDesc="#{bindings.employeesFindBySal.hints.employeeId.tooltip}"
+                     id="ot3">
+        <af:convertNumber groupingUsed="false" pattern="#{bindings.employeesFindBySal.hints.employeeId.format}"/>
+      </af:outputText>
+    </af:column>
+    <af:column sortProperty="#{bindings.employeesFindBySal.hints.firstName.name}" filterable="true" sortable="true"
+               headerText="#{bindings.employeesFindBySal.hints.firstName.label}" id="c4">
+      <af:outputText value="#{row.firstName}" shortDesc="#{bindings.employeesFindBySal.hints.firstName.tooltip}"
+                     id="ot4"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.employeesFindBySal.hints.hireDate.name}" filterable="true" sortable="true"
+               headerText="#{bindings.employeesFindBySal.hints.hireDate.label}" id="c5">
+      <f:facet name="filter">
+        <af:inputDate value="#{bindings.employeesFindBySalQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.hireDate.value}"
+                      id="id1">
+          <af:convertDateTime pattern="#{bindings.employeesFindBySal.hints.hireDate.format}"/>
+        </af:inputDate>
+      </f:facet>
+      <af:outputText value="#{row.hireDate}" shortDesc="#{bindings.employeesFindBySal.hints.hireDate.tooltip}" id="ot5">
+        <af:convertDateTime pattern="#{bindings.employeesFindBySal.hints.hireDate.format}"/>
+      </af:outputText>
+    </af:column>
+    <af:column sortProperty="#{bindings.employeesFindBySal.hints.jobId.name}" filterable="true" sortable="true"
+               headerText="#{bindings.employeesFindBySal.hints.jobId.label}" id="c6">
+      <af:outputText value="#{row.jobId}" shortDesc="#{bindings.employeesFindBySal.hints.jobId.tooltip}" id="ot6"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.employeesFindBySal.hints.lastName.name}" filterable="true" sortable="true"
+               headerText="#{bindings.employeesFindBySal.hints.lastName.label}" id="c7">
+      <af:outputText value="#{row.lastName}" shortDesc="#{bindings.employeesFindBySal.hints.lastName.tooltip}"
+                     id="ot7"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.employeesFindBySal.hints.phoneNumber.name}" filterable="true" sortable="true"
+               headerText="#{bindings.employeesFindBySal.hints.phoneNumber.label}" id="c8">
+      <af:outputText value="#{row.phoneNumber}" shortDesc="#{bindings.employeesFindBySal.hints.phoneNumber.tooltip}"
+                     id="ot8"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.employeesFindBySal.hints.salary.name}" sortable="true"
+               headerText="#{bindings.employeesFindBySal.hints.salary.label}" filterable="true" id="c9">
+      <af:outputText value="#{row.salary}" shortDesc="#{bindings.employeesFindBySal.hints.salary.tooltip}" id="ot9">
+        <af:convertNumber groupingUsed="false" pattern="#{bindings.employeesFindBySal.hints.salary.format}"/>
+      </af:outputText>
+    </af:column>
+  </af:table>
+  <af:button text="Back" id="b1" action="back"/>
+</ui:composition>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="mainHRPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="root" RangeSize="25" DataControl="HRFacadeBean" id="HRFacadeBeanIterator" ChangeEventPolicy="ppr"/>
+    <accessorIterator MasterBinding="HRFacadeBeanIterator" Binds="departmentsFindAll" RangeSize="25"
+                      DataControl="HRFacadeBean" BeanClass="model.Departments" id="departmentsFindAllIterator"
+                      ChangeEventPolicy="ppr"/>
+    <accessorIterator MasterBinding="departmentsFindAllIterator" Binds="employeesList1" RangeSize="-1"
+                      DataControl="HRFacadeBean" BeanClass="model.Employees" id="employeesList1Iterator"
+                      ChangeEventPolicy="ppr"/>
+    <searchRegion Binds="employeesList1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="employeesList1Query"/>
+    <taskFlow id="findBySalFlow1" taskFlowId="/WEB-INF/findBySalFlow.xml#findBySalFlow" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="departmentsFindAllIterator" id="departmentId">
+      <AttrNames>
+        <Item Value="departmentId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="departmentsFindAllIterator" id="departmentName">
+      <AttrNames>
+        <Item Value="departmentName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="departmentsFindAllIterator" id="locationId">
+      <AttrNames>
+        <Item Value="locationId"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="departmentsFindAllIterator" id="First" RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="departmentsFindAllIterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="departmentsFindAllIterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="departmentsFindAllIterator" id="Last" RequiresUpdateModel="true" Action="last"/>
+    <tree IterBinding="employeesList1Iterator" id="employeesList1">
+      <nodeDefinition DefName="model.Employees" Name="employeesList10">
+        <AttrNames>
+          <Item Value="firstName"/>
+          <Item Value="lastName"/>
+          <Item Value="commissionPct"/>
+          <Item Value="email"/>
+          <Item Value="employeeId"/>
+          <Item Value="hireDate"/>
+          <Item Value="jobId"/>
+          <Item Value="phoneNumber"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="employeesList1Iterator" id="commissionPct">
+      <AttrNames>
+        <Item Value="commissionPct"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="employeesList1Iterator" id="email">
+      <AttrNames>
+        <Item Value="email"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="employeesList1Iterator" id="employeeId">
+      <AttrNames>
+        <Item Value="employeeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="employeesList1Iterator" id="firstName">
+      <AttrNames>
+        <Item Value="firstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="employeesList1Iterator" id="hireDate">
+      <AttrNames>
+        <Item Value="hireDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="employeesList1Iterator" id="jobId">
+      <AttrNames>
+        <Item Value="jobId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="employeesList1Iterator" id="lastName">
+      <AttrNames>
+        <Item Value="lastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="employeesList1Iterator" id="phoneNumber">
+      <AttrNames>
+        <Item Value="phoneNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="employeesList1Iterator" id="salary">
+      <AttrNames>
+        <Item Value="salary"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="employeesList1Iterator" id="employeesList11" ChangeEventPolicy="ppr">
+      <nodeDefinition DefName="model.Employees" Name="employeesList11">
+        <AttrNames>
+          <Item Value="salary"/>
+          <Item Value="firstName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="persistDepartments" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="persistDepartments" IsViewObjectMethod="false" DataControl="HRFacadeBean"
+                  InstanceName="bindings.persistDepartments.dataControl.dataProvider"
+                  ReturnName="data.HRFacadeBean.methodResults.persistDepartments_persistDepartments_dataControl_dataProvider_persistDepartments_result">
+      <NamedData NDName="departments" NDValue="#{bindings.departmentsFindAllIterator.currentRow.dataProvider}"
+                 NDType="model.Departments"/>
+    </methodAction>
+    <action IterBinding="departmentsFindAllIterator" id="Create" RequiresUpdateModel="true" Action="createRow"/>
+    <action IterBinding="departmentsFindAllIterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+  </bindings>
+</pageDefinition>
