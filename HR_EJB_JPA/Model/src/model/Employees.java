@@ -26,6 +26,7 @@ import javax.persistence.TemporalType;
 @NamedQuery(name = "Employees.findByLastName", query = "select o from Employees o where o.lastName like :p_lastName")
 }) 
 public class Employees implements Serializable {
+    
     private static final long serialVersionUID = -7478428200938493715L;
     @Column(name = "COMMISSION_PCT")
     private Integer commissionPct;
